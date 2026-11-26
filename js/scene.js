@@ -19,19 +19,25 @@ export function createScene(canvas, onSelect) {
   scene.add(sun);
 
   var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200);
-  camera.position.set(11, 9.5, 18);
-  camera.lookAt(0, 3.4, 0);
+  /* Framed on the block's projected centre, pulled back so the whole
+     block — roof, both ends, the forecourt in front — sits inside the
+     canvas with a margin. resize() widens the fov on tall canvases so
+     the width fits there too. */
+  camera.position.set(14.5, 11.9, 26);
+  camera.lookAt(2.1, 3.1, -0.2);
 
   var world = new THREE.Group();
   world.rotation.y = -0.35;
   scene.add(world);
 
+  /* the plot hugs the building: ~2 units of ground past the roof line
+     at the back, the washrooms/coolers at the sides, the forecourt in front */
   var ground = new THREE.Mesh(
-    new THREE.PlaneGeometry(46, 30),
+    new THREE.PlaneGeometry(26, 12),
     new THREE.MeshStandardMaterial({ color: GROUND, roughness: 1 })
   );
   ground.rotation.x = -Math.PI / 2;
-  ground.position.y = -0.02;
+  ground.position.set(0, -0.02, 1.5);
   world.add(ground);
 
   var meshes = {};   // placeId -> { mesh, marker, baseColor }
@@ -122,6 +128,23 @@ export function createScene(canvas, onSelect) {
     );
     roof.position.set(0, 0.95 + 3 * 1.85 + 0.85, -0.5);
     world.add(roof);
+    /* forecourt: a paved pad under the ground-floor shared points and a
+       path from the block's front, so the mess, common room and entrance
+       stand on the scene instead of floating in front of it */
+    var pad = new THREE.Mesh(
+      new THREE.BoxGeometry(17.6, 0.07, 2.7),
+      new THREE.MeshStandardMaterial({ color: 0xdccda6, roughness: 1 })
+    );
+    pad.position.set(0, 0.035, 4.6);
+    addEdges(pad);
+    world.add(pad);
+    var path = new THREE.Mesh(
+      new THREE.BoxGeometry(3.4, 0.06, 2.6),
+      new THREE.MeshStandardMaterial({ color: 0xdccda6, roughness: 1 })
+    );
+    path.position.set(0, 0.03, 2.45);
+    addEdges(path);
+    world.add(path);
   }
 
   function refresh(complaints) {
@@ -175,6 +198,11 @@ export function createScene(canvas, onSelect) {
     renderer.setPixelRatio(dpr);
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
+    /* hold the horizontal view at ~60°: on a tall canvas the vertical
+       fov grows instead, so the block's width never crops */
+    var halfH = Math.tan(THREE.MathUtils.degToRad(30));
+    camera.fov = THREE.MathUtils.clamp(
+      THREE.MathUtils.radToDeg(2 * Math.atan(halfH / camera.aspect)), 30, 85);
     camera.updateProjectionMatrix();
   }
   var ro = new ResizeObserver(function () { resize(); renderOnce(); });
