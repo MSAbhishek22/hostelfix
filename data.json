@@ -1,0 +1,573 @@
+{
+  "block": {
+    "name": "Block C",
+    "floors": 4,
+    "roomsPerFloor": 10
+  },
+  "trades": [
+    {
+      "id": "plumber",
+      "label": "Plumber",
+      "person": "Ramesh"
+    },
+    {
+      "id": "electrician",
+      "label": "Electrician",
+      "person": "Suraj"
+    },
+    {
+      "id": "carpenter",
+      "label": "Carpenter",
+      "person": "Mohan"
+    },
+    {
+      "id": "housekeeping",
+      "label": "Housekeeping",
+      "person": "Geeta"
+    },
+    {
+      "id": "mess",
+      "label": "Mess",
+      "person": "Arvind"
+    }
+  ],
+  "places": [
+    {
+      "id": "room-101",
+      "label": "Room 101",
+      "kind": "room",
+      "floor": 1,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-102",
+      "label": "Room 102",
+      "kind": "room",
+      "floor": 1,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-103",
+      "label": "Room 103",
+      "kind": "room",
+      "floor": 1,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-104",
+      "label": "Room 104",
+      "kind": "room",
+      "floor": 1,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-105",
+      "label": "Room 105",
+      "kind": "room",
+      "floor": 1,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-106",
+      "label": "Room 106",
+      "kind": "room",
+      "floor": 1,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-107",
+      "label": "Room 107",
+      "kind": "room",
+      "floor": 1,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-108",
+      "label": "Room 108",
+      "kind": "room",
+      "floor": 1,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-109",
+      "label": "Room 109",
+      "kind": "room",
+      "floor": 1,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-110",
+      "label": "Room 110",
+      "kind": "room",
+      "floor": 1,
+      "defaultTrade": null
+    },
+    {
+      "id": "cooler-1",
+      "label": "Water cooler — Floor 1",
+      "kind": "shared",
+      "floor": 1,
+      "defaultTrade": "plumber"
+    },
+    {
+      "id": "washroom-1",
+      "label": "Washroom — Floor 1",
+      "kind": "shared",
+      "floor": 1,
+      "defaultTrade": "plumber"
+    },
+    {
+      "id": "corridor-1",
+      "label": "Corridor — Floor 1",
+      "kind": "shared",
+      "floor": 1,
+      "defaultTrade": "electrician"
+    },
+    {
+      "id": "room-201",
+      "label": "Room 201",
+      "kind": "room",
+      "floor": 2,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-202",
+      "label": "Room 202",
+      "kind": "room",
+      "floor": 2,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-203",
+      "label": "Room 203",
+      "kind": "room",
+      "floor": 2,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-204",
+      "label": "Room 204",
+      "kind": "room",
+      "floor": 2,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-205",
+      "label": "Room 205",
+      "kind": "room",
+      "floor": 2,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-206",
+      "label": "Room 206",
+      "kind": "room",
+      "floor": 2,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-207",
+      "label": "Room 207",
+      "kind": "room",
+      "floor": 2,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-208",
+      "label": "Room 208",
+      "kind": "room",
+      "floor": 2,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-209",
+      "label": "Room 209",
+      "kind": "room",
+      "floor": 2,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-210",
+      "label": "Room 210",
+      "kind": "room",
+      "floor": 2,
+      "defaultTrade": null
+    },
+    {
+      "id": "cooler-2",
+      "label": "Water cooler — Floor 2",
+      "kind": "shared",
+      "floor": 2,
+      "defaultTrade": "plumber"
+    },
+    {
+      "id": "washroom-2",
+      "label": "Washroom — Floor 2",
+      "kind": "shared",
+      "floor": 2,
+      "defaultTrade": "plumber"
+    },
+    {
+      "id": "corridor-2",
+      "label": "Corridor — Floor 2",
+      "kind": "shared",
+      "floor": 2,
+      "defaultTrade": "electrician"
+    },
+    {
+      "id": "room-301",
+      "label": "Room 301",
+      "kind": "room",
+      "floor": 3,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-302",
+      "label": "Room 302",
+      "kind": "room",
+      "floor": 3,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-303",
+      "label": "Room 303",
+      "kind": "room",
+      "floor": 3,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-304",
+      "label": "Room 304",
+      "kind": "room",
+      "floor": 3,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-305",
+      "label": "Room 305",
+      "kind": "room",
+      "floor": 3,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-306",
+      "label": "Room 306",
+      "kind": "room",
+      "floor": 3,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-307",
+      "label": "Room 307",
+      "kind": "room",
+      "floor": 3,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-308",
+      "label": "Room 308",
+      "kind": "room",
+      "floor": 3,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-309",
+      "label": "Room 309",
+      "kind": "room",
+      "floor": 3,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-310",
+      "label": "Room 310",
+      "kind": "room",
+      "floor": 3,
+      "defaultTrade": null
+    },
+    {
+      "id": "cooler-3",
+      "label": "Water cooler — Floor 3",
+      "kind": "shared",
+      "floor": 3,
+      "defaultTrade": "plumber"
+    },
+    {
+      "id": "washroom-3",
+      "label": "Washroom — Floor 3",
+      "kind": "shared",
+      "floor": 3,
+      "defaultTrade": "plumber"
+    },
+    {
+      "id": "corridor-3",
+      "label": "Corridor — Floor 3",
+      "kind": "shared",
+      "floor": 3,
+      "defaultTrade": "electrician"
+    },
+    {
+      "id": "room-401",
+      "label": "Room 401",
+      "kind": "room",
+      "floor": 4,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-402",
+      "label": "Room 402",
+      "kind": "room",
+      "floor": 4,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-403",
+      "label": "Room 403",
+      "kind": "room",
+      "floor": 4,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-404",
+      "label": "Room 404",
+      "kind": "room",
+      "floor": 4,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-405",
+      "label": "Room 405",
+      "kind": "room",
+      "floor": 4,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-406",
+      "label": "Room 406",
+      "kind": "room",
+      "floor": 4,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-407",
+      "label": "Room 407",
+      "kind": "room",
+      "floor": 4,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-408",
+      "label": "Room 408",
+      "kind": "room",
+      "floor": 4,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-409",
+      "label": "Room 409",
+      "kind": "room",
+      "floor": 4,
+      "defaultTrade": null
+    },
+    {
+      "id": "room-410",
+      "label": "Room 410",
+      "kind": "room",
+      "floor": 4,
+      "defaultTrade": null
+    },
+    {
+      "id": "cooler-4",
+      "label": "Water cooler — Floor 4",
+      "kind": "shared",
+      "floor": 4,
+      "defaultTrade": "plumber"
+    },
+    {
+      "id": "washroom-4",
+      "label": "Washroom — Floor 4",
+      "kind": "shared",
+      "floor": 4,
+      "defaultTrade": "plumber"
+    },
+    {
+      "id": "corridor-4",
+      "label": "Corridor — Floor 4",
+      "kind": "shared",
+      "floor": 4,
+      "defaultTrade": "electrician"
+    },
+    {
+      "id": "mess",
+      "label": "Mess hall",
+      "kind": "shared",
+      "floor": 0,
+      "defaultTrade": "mess"
+    },
+    {
+      "id": "common-room",
+      "label": "Common room",
+      "kind": "shared",
+      "floor": 0,
+      "defaultTrade": "carpenter"
+    },
+    {
+      "id": "entrance",
+      "label": "Block entrance",
+      "kind": "shared",
+      "floor": 0,
+      "defaultTrade": "housekeeping"
+    }
+  ],
+  "seedComplaints": [
+    {
+      "id": "c1",
+      "placeId": "cooler-3",
+      "text": "3rd floor ka water cooler band hai, paani nahi aa raha",
+      "trade": "plumber",
+      "priority": "urgent",
+      "status": "assigned",
+      "by": "Rohit",
+      "lastMove": "Given to Ramesh, the plumber · 40 min ago"
+    },
+    {
+      "id": "c2",
+      "placeId": "room-204",
+      "text": "Room 204 ka pankha bahut awaz karta hai, neend kharab hoti hai",
+      "trade": "electrician",
+      "priority": "normal",
+      "status": "in-progress",
+      "by": "Aman",
+      "lastMove": "Suraj started work · 1 hr ago"
+    },
+    {
+      "id": "c3",
+      "placeId": "washroom-2",
+      "text": "Washroom ke switch se spark nikal raha hai",
+      "trade": "electrician",
+      "priority": "urgent",
+      "status": "new",
+      "by": "Kunal",
+      "lastMove": "Filed · 12 min ago"
+    },
+    {
+      "id": "c4",
+      "placeId": "room-108",
+      "text": "Darwaza band nahi hota, lock kharab hai",
+      "trade": "carpenter",
+      "priority": "normal",
+      "status": "assigned",
+      "by": "Deepak",
+      "lastMove": "Given to Mohan, the carpenter · 2 hr ago"
+    },
+    {
+      "id": "c5",
+      "placeId": "corridor-2",
+      "text": "Corridor ki light band hai, raat ko pura andhera rehta hai",
+      "trade": "electrician",
+      "priority": "high",
+      "status": "in-progress",
+      "by": "Vivek",
+      "lastMove": "Suraj is on the floor · 30 min ago"
+    },
+    {
+      "id": "c6",
+      "placeId": "mess",
+      "text": "Aaj khane me baal nikla, dusri baar hua hai",
+      "trade": "mess",
+      "priority": "high",
+      "status": "new",
+      "by": "Sahil",
+      "lastMove": "Filed · 25 min ago"
+    },
+    {
+      "id": "c7",
+      "placeId": "room-305",
+      "text": "Nal tapak raha hai, raat bhar paani girta rehta hai",
+      "trade": "plumber",
+      "priority": "normal",
+      "status": "done",
+      "by": "Nikhil",
+      "lastMove": "Fixed by Ramesh · yesterday"
+    },
+    {
+      "id": "c8",
+      "placeId": "washroom-1",
+      "text": "Naali jam hai, paani bhar raha hai",
+      "trade": "plumber",
+      "priority": "high",
+      "status": "assigned",
+      "by": "Aditya",
+      "lastMove": "Given to Ramesh, the plumber · 1 hr ago"
+    },
+    {
+      "id": "c9",
+      "placeId": "room-402",
+      "text": "Almari ka handle toot gaya",
+      "trade": "carpenter",
+      "priority": "normal",
+      "status": "done",
+      "by": "Rahul",
+      "lastMove": "Fixed by Mohan · yesterday"
+    },
+    {
+      "id": "c10",
+      "placeId": "corridor-1",
+      "text": "Floor 1 ke corridor me kachra pada hai, safai nahi hui",
+      "trade": "housekeeping",
+      "priority": "normal",
+      "status": "new",
+      "by": "Sumit",
+      "lastMove": "Filed · 3 hr ago"
+    },
+    {
+      "id": "c11",
+      "placeId": "room-109",
+      "text": "Socket me haath lagane se current lag raha hai",
+      "trade": "electrician",
+      "priority": "urgent",
+      "status": "in-progress",
+      "by": "Arjun",
+      "lastMove": "Suraj reached the room · 10 min ago"
+    },
+    {
+      "id": "c12",
+      "placeId": "mess",
+      "text": "Daal me namak zyada hai, khana mushkil ho gaya",
+      "trade": "mess",
+      "priority": "low",
+      "status": "done",
+      "by": "Manish",
+      "lastMove": "Mess in-charge noted it · yesterday"
+    },
+    {
+      "id": "c13",
+      "placeId": "room-310",
+      "text": "Khidki ka kaanch toota hai, thandi hawa aa rahi hai",
+      "trade": "carpenter",
+      "priority": "high",
+      "status": "assigned",
+      "by": "Varun",
+      "lastMove": "Given to Mohan, the carpenter · 3 hr ago"
+    },
+    {
+      "id": "c14",
+      "placeId": "room-207",
+      "text": "Bed ka ek pair toot gaya hai",
+      "trade": "carpenter",
+      "priority": "normal",
+      "status": "new",
+      "by": "Yash",
+      "lastMove": "Filed · 5 hr ago"
+    },
+    {
+      "id": "c15",
+      "placeId": "cooler-1",
+      "text": "Cooler ka paani garam aa raha hai",
+      "trade": "plumber",
+      "priority": "normal",
+      "status": "new",
+      "by": "Ritik",
+      "lastMove": "Filed · 2 hr ago"
+    }
+  ]
+}

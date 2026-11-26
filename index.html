@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HostelFix — Block C noticeboard</title>
+<meta name="description" content="One complaint, filed in plain words, routed to the right trade and watched till it is done.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='38' r='20' fill='%23d43a2f'/><rect x='44' y='52' width='12' height='40' fill='%2322409a'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="sign">
+      <h1>Hostel<span>Fix</span></h1>
+      <p class="sign-sub">Block C noticeboard · complaints that move</p>
+    </div>
+    <div class="counts" aria-label="Board counts">
+      <div class="count"><strong id="count-open">–</strong><small>open now</small></div>
+      <div class="count urgent"><strong id="count-urgent">–</strong><small>urgent</small></div>
+      <div class="count done"><strong id="count-done">–</strong><small>done</small></div>
+    </div>
+  </div>
+</header>
+
+<section class="strip" aria-label="How HostelFix helps">
+  <article class="note problem">
+    <span class="pin" aria-hidden="true"></span>
+    <h2>The problem</h2>
+    <p>A hostel complaint goes into a paper register at the warden's desk. Nobody reads it back. The fan keeps making its noise for a month.</p>
+  </article>
+  <article class="note solution">
+    <span class="pin" aria-hidden="true"></span>
+    <h2>What HostelFix does</h2>
+    <p>You write the problem in your own words — Hindi, English, mixed. HostelFix reads the words, picks the right trade, sets a priority, and pins it on this board.</p>
+  </article>
+  <article class="note outcome">
+    <span class="pin" aria-hidden="true"></span>
+    <h2>What changes</h2>
+    <p>The complaint stays on the board where everyone can see it — new, given out, being fixed — until it is marked done. Nothing sinks into a register.</p>
+  </article>
+</section>
+
+<main class="board-grid">
+
+  <section class="card form-card" aria-labelledby="form-h">
+    <span class="tape" aria-hidden="true"></span>
+    <h2 id="form-h">File a complaint</h2>
+    <p class="hint">One complaint. Plain words. Twenty seconds.</p>
+    <form id="complaint-form">
+      <label for="place">Where is it?</label>
+      <select id="place" required></select>
+      <label for="text">What is wrong?</label>
+      <textarea id="text" rows="3" required placeholder="e.g. 3rd floor ka water cooler band hai, paani nahi aa raha"></textarea>
+      <label for="by">Your name <small>(optional)</small></label>
+      <input id="by" type="text" autocomplete="off" placeholder="e.g. Rohit">
+      <button type="submit" class="file-btn">Pin it on the board</button>
+    </form>
+    <div id="route-slip" class="route-slip" hidden>
+      <h3>Routed</h3>
+      <p class="slip-line"><span id="slip-trade" class="tag"></span> <span id="slip-priority" class="stamp"></span></p>
+      <p id="slip-reason" class="slip-reason"></p>
+    </div>
+    <div class="try-box">
+      <p>Try one:</p>
+      <button type="button" class="try-btn" data-try="room-214|Room 214 ka pankha bahut awaz karta hai">Pankha awaz karta hai</button>
+      <button type="button" class="try-btn" data-try="washroom-2|Washroom ke switch se spark nikal raha hai">Switch se spark</button>
+      <button type="button" class="try-btn" data-try="mess|Mess ke khane me baal nikla hai">Khane me baal</button>
+    </div>
+  </section>
+
+  <section class="card stage-card" aria-labelledby="stage-h">
+    <h2 id="stage-h">Block C, live</h2>
+    <p class="hint">Amber means a complaint is open. Red means urgent. Tap a room or a marker to see what is pinned there.</p>
+    <div class="canvas-wrap">
+      <canvas id="stage" aria-label="3D view of Block C with open complaints lit up"></canvas>
+    </div>
+    <div id="place-detail" class="place-detail">
+      <h3 id="detail-title">Nothing picked yet</h3>
+      <div id="detail-list"><p class="hint">Tap any room, cooler, washroom or corridor in the block.</p></div>
+    </div>
+  </section>
+
+  <section class="card board-card" aria-labelledby="board-h">
+    <span class="tape" aria-hidden="true"></span>
+    <h2 id="board-h">The board</h2>
+    <div class="chips" role="group" aria-label="Filter by status">
+      <button type="button" class="chip active" data-filter="all">All</button>
+      <button type="button" class="chip" data-filter="new">New</button>
+      <button type="button" class="chip" data-filter="assigned">Given out</button>
+      <button type="button" class="chip" data-filter="in-progress">Being fixed</button>
+      <button type="button" class="chip" data-filter="done">Done</button>
+    </div>
+    <div id="board" class="board"></div>
+  </section>
+
+</main>
+
+<section class="below">
+  <div class="how">
+    <h2>How it works</h2>
+    <ol>
+      <li><strong>Write it plainly.</strong> "Nal tapak raha hai" is fine. Spelling does not matter, the words do.</li>
+      <li><strong>The words pick the trade.</strong> Pankha, spark and bijli go to the electrician. Nal, paani and naali go to the plumber. Safety words — spark, shock, current — jump the queue.</li>
+      <li><strong>It stays pinned till done.</strong> The board and the block above both show it. When the work is finished, it is marked done in front of everyone.</li>
+    </ol>
+    <p class="honest">Honest labels: the routing is keyword matching, done in your browser — no AI model, no server. Every slip shows the words that matched, so a wrong route can be spotted and argued with. If no words match, the slip goes to the warden desk for a person to read.</p>
+  </div>
+
+  <div class="bench card">
+    <h2>HostelFixBench-15</h2>
+    <p>Fifteen written complaints, each with the trade and priority a warden would expect. Run them against the same router this page uses.</p>
+    <button type="button" id="bench-btn" class="file-btn">Run the bench</button>
+    <p id="bench-score" class="bench-score" hidden></p>
+    <div class="bench-scroll">
+      <table id="bench-table" hidden>
+        <thead><tr><th>#</th><th>Complaint</th><th>Expected</th><th>Got</th><th>Result</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>HostelFix is a working demo with a made-up Block C — 4 floors, 40 rooms, and the complaints pinned above. Your own complaints are kept only in this browser.</p>
+  <button type="button" id="reset-btn">Reset the board</button>
+</footer>
+
+<script src="js/router.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
