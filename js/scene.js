@@ -19,19 +19,55 @@ export function createScene(canvas, onSelect) {
   scene.add(sun);
 
   var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200);
-  /* Framed on the block's projected centre, pulled back so the whole
-     block — roof, both ends, the forecourt in front — sits inside the
-     canvas with a margin. resize() widens the fov on tall canvases so
-     the width fits there too. */
+  /* Placeholder until build() runs: the real framing is fit-to-view —
+     applyFit() places the camera along VIEW_DIR at the distance that
+     fits the whole world box for the canvas's current aspect. */
   camera.position.set(14.5, 11.9, 26);
   camera.lookAt(2.1, 3.1, -0.2);
+
+  /* --- fit-to-view: no hand-tuned framing numbers ---
+     VIEW_DIR keeps the round-1 view feel (the old camera's offset from
+     its look-at point, normalised). fitBox/fitCentre are set in build()
+     from the world group's real Box3 — roof, slabs, side points,
+     forecourt and ground, world rotation included. */
+  var VIEW_DIR = new THREE.Vector3(12.4, 8.8, 26.2).normalize();
+  var fitBox = null, fitCentre = null, zoomScale = 1;
+
+  function applyFit() {
+    if (!fitBox) return;
+    var corners = [];
+    for (var xi of [fitBox.min.x, fitBox.max.x])
+      for (var yi of [fitBox.min.y, fitBox.max.y])
+        for (var zi of [fitBox.min.z, fitBox.max.z])
+          corners.push(new THREE.Vector3(xi, yi, zi));
+    /* Sit 1 unit out along the view direction and look at the centre:
+       a corner's camera-space x/y do not depend on the distance, only
+       its depth does — so the distance each corner needs is solved
+       exactly, for width and for height, at the current aspect. */
+    camera.position.copy(fitCentre).addScaledVector(VIEW_DIR, 1);
+    camera.lookAt(fitCentre);
+    camera.updateMatrixWorld(true);
+    var tanV = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+    var tanH = tanV * camera.aspect;
+    var inv = camera.matrixWorldInverse, d = 0;
+    corners.forEach(function (c) {
+      var v = c.clone().applyMatrix4(inv);
+      var along = v.z + 1; /* the corner's offset along VIEW_DIR from the centre */
+      d = Math.max(d, along + Math.abs(v.x) / tanH, along + Math.abs(v.y) / tanV);
+    });
+    d *= 1.06; /* ~6% margin on every side */
+    camera.position.copy(fitCentre).addScaledVector(VIEW_DIR, d * zoomScale);
+    camera.lookAt(fitCentre);
+    camera.updateMatrixWorld(true);
+  }
 
   var world = new THREE.Group();
   world.rotation.y = -0.35;
   scene.add(world);
 
-  /* the plot hugs the building: ~2 units of ground past the roof line
-     at the back, the washrooms/coolers at the sides, the forecourt in front */
+  /* the plot hugs the building — this size is only a placeholder:
+     build() re-sizes the ground to the built footprint + ~1.5 units
+     on each side, from the geometry's own bounds */
   var ground = new THREE.Mesh(
     new THREE.PlaneGeometry(26, 12),
     new THREE.MeshStandardMaterial({ color: GROUND, roughness: 1 })
@@ -130,21 +166,42 @@ export function createScene(canvas, onSelect) {
     world.add(roof);
     /* forecourt: a paved pad under the ground-floor shared points and a
        path from the block's front, so the mess, common room and entrance
-       stand on the scene instead of floating in front of it */
+       stand on the scene instead of floating in front of it. The paving
+       is a cool slate, much darker than the warm ground, so the pad can
+       never be mistaken for the ground it sits on. */
     var pad = new THREE.Mesh(
       new THREE.BoxGeometry(17.6, 0.07, 2.7),
-      new THREE.MeshStandardMaterial({ color: 0xdccda6, roughness: 1 })
+      new THREE.MeshStandardMaterial({ color: 0x8b98a8, roughness: 1 })
     );
     pad.position.set(0, 0.035, 4.6);
     addEdges(pad);
     world.add(pad);
     var path = new THREE.Mesh(
       new THREE.BoxGeometry(3.4, 0.06, 2.6),
-      new THREE.MeshStandardMaterial({ color: 0xdccda6, roughness: 1 })
+      new THREE.MeshStandardMaterial({ color: 0x8b98a8, roughness: 1 })
     );
     path.position.set(0, 0.03, 2.45);
     addEdges(path);
     world.add(path);
+
+    /* the ground hugs the block: the built footprint (everything except
+       the ground itself) + ~1.5 units on each side */
+    world.updateMatrixWorld(true);
+    var foot = new THREE.Box3();
+    world.children.forEach(function (c) {
+      if (c !== ground) foot.union(new THREE.Box3().setFromObject(c));
+    });
+    ground.geometry.dispose();
+    ground.geometry = new THREE.PlaneGeometry(
+      (foot.max.x - foot.min.x) + 3, (foot.max.z - foot.min.z) + 3);
+    ground.position.set(
+      (foot.min.x + foot.max.x) / 2, -0.02, (foot.min.z + foot.max.z) / 2);
+
+    /* frame the whole world — ground included — from its real bounds */
+    world.updateMatrixWorld(true);
+    fitBox = new THREE.Box3().setFromObject(world);
+    fitCentre = fitBox.getCenter(new THREE.Vector3());
+    applyFit();
   }
 
   function refresh(complaints) {
@@ -198,12 +255,11 @@ export function createScene(canvas, onSelect) {
     renderer.setPixelRatio(dpr);
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
-    /* hold the horizontal view at ~60°: on a tall canvas the vertical
-       fov grows instead, so the block's width never crops */
-    var halfH = Math.tan(THREE.MathUtils.degToRad(30));
-    camera.fov = THREE.MathUtils.clamp(
-      THREE.MathUtils.radToDeg(2 * Math.atan(halfH / camera.aspect)), 30, 85);
+    camera.fov = 42;
     camera.updateProjectionMatrix();
+    /* refit on every size change, so any canvas keeps the whole block
+       in frame with its margin */
+    applyFit();
   }
   var ro = new ResizeObserver(function () { resize(); renderOnce(); });
   ro.observe(canvas);
@@ -229,7 +285,9 @@ export function createScene(canvas, onSelect) {
   });
   canvas.addEventListener("wheel", function (e) {
     e.preventDefault();
-    camera.position.z = THREE.MathUtils.clamp(camera.position.z + e.deltaY * 0.02, 12, 30);
+    /* zoom moves along the view direction, around the fitted distance */
+    zoomScale = THREE.MathUtils.clamp(zoomScale * (1 + e.deltaY * 0.001), 0.55, 1.7);
+    applyFit();
     renderOnce();
   }, { passive: false });
 
